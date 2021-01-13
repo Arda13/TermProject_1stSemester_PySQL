@@ -1,0 +1,16 @@
+{
+    "python.linting.pylintArgs": [
+        "--load-plugins",
+        "pylint_flask_sqlalchemy",
+        "pylint_flask",              
+    ],
+    "python.linting.mypyArgs": [
+        "--ignore-missing-imports",
+        "--follow-imports=silent",
+        "--show-column-numbers",
+        "--load-plugins",
+        "pylint_flask_sqlalchemy",
+        "pylint_flask"
+    ],
+    "eslint.trace.server": null
+}
