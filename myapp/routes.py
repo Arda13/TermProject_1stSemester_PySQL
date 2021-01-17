@@ -1,7 +1,9 @@
+import os
+import secrets
 from flask import render_template, url_for, flash, redirect, request
 from myapp import app, db, bcrypt
-from myapp.forms import RegistrationForm, LoginForm
-from myapp.models import User, Post
+from myapp.forms import RegistrationForm, LoginForm, UpdateAccountForm
+from myapp.models import User
 from flask_login import login_user, current_user, logout_user, login_required
 
 
@@ -22,9 +24,9 @@ posts = [
 
 
 @app.route("/")
-@app.route("/home")
+@app.route('/home')
 def home():
-    return render_template('home.html', posts=posts, title='Home')
+    return render_template('home.html', posts=posts)
 
 
 @app.route("/about")
@@ -38,8 +40,10 @@ def register():
         return redirect(url_for('home'))
     form = RegistrationForm()
     if form.validate_on_submit():
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        hashed_password = bcrypt.generate_password_hash(
+            form.password.data).decode('utf-8')
+        user = User(username=form.username.data,
+                    email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in', 'success')
@@ -69,7 +73,21 @@ def logout():
     return redirect(url_for('home'))
 
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html', title='Account')
+    form = UpdateAccountForm()
+    if form.validate_on_submit():
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash('Your account has been updated!', 'success')
+        return redirect(url_for('account'))
+    elif request.method == 'GET':
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    return render_template('account.html', title='Account', form=form)
+
+
+
+

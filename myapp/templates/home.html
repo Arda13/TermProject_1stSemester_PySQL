@@ -1,15 +1,46 @@
 {% extends "layout.html" %}
 {% block content %}
-    {% for post in posts %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.author }}</a>
-              <small class="text-muted">{{ post.date_posted }}</small>
-            </div>
-            <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
-            <p class="article-content">{{ post.content }}</p>
-          </div>
-        </article>
-    {% endfor %}
+<div class="container">
+  <h2>Registration</h2>
+  <br>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect01">Select Your Faculty</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option value="1">Faculty of Economic Sciences</option>
+  </select>
+</div>
+
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <label class="input-group-text" for="inputGroupSelect02">Select Your Class</label>
+  </div>
+  <select class="custom-select" id="inputGroupSelect01">
+    <option selected>Introduction to Python and SQL</option>
+    <option value="1">Applied Macroeconomics</option>
+    <option value="2">Applied Microeconomics</option>
+    <option value="3">Introduction to Data Science</option>
+    <option value="3">Unsupervised Learning</option>
+    <option value="3">Introduction to R</option>  </select>
+</div>
+
+<div class="btn-group btn-group-toggle " data-toggle="buttons">
+  <label class="btn btn-secondary active">
+    <input type="radio" name="options" id="option1" autocomplete="off" checked> Monday 13:00
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option2" autocomplete="off"> Thursday 15:00
+  </label>
+  <label class="btn btn-secondary">
+    <input type="radio" name="options" id="option3" autocomplete="off"> Friday: 16:00
+  </label>
+</div>
+</div>
+
+<div class="border-top pt-3">
+  <small class="text-muted">
+      Need An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign Up Now</a>
+  </small>
+</div>
 {% endblock content %}
