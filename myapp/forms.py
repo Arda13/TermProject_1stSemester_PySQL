@@ -7,7 +7,7 @@ from myapp.models import User
 
 
 class RegistrationForm(FlaskForm):
-    username = StringField('Username',
+    username = StringField('Name Surname',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
@@ -36,7 +36,7 @@ class LoginForm(FlaskForm):
 
 
 class UpdateAccountForm(FlaskForm):
-    username = StringField('Username',
+    username = StringField('Name Surname',
                            validators=[DataRequired(), Length(min=2, max=20)])
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
@@ -56,7 +56,7 @@ class UpdateAccountForm(FlaskForm):
 
 
 class PostClass(FlaskForm):
-        classes = SelectField(u'Select Your Class', choices=[('PYSQL', 'Introduction to Python and SQL'), ('APMA', 'Applied Macroeconomics'), ('APMI', 'Applied Microeconomics'),('DAT', 'Introducion to Data Science'),('UL', 'Unsupervised Learning'),('R', 'Introduction to R')])
+        classes = SelectField(u'programs', choices=[('PYSQL', 'Introduction to Python and SQL'), ('APMA', 'Applied Macroeconomics'), ('APMI', 'Applied Microeconomics'),('DAT', 'Introducion to Data Science'),('UL', 'Unsupervised Learning'),('R', 'Introduction to R')])
 
-        times = SelectField(u'Select a Time', choices=[])
+        times = SelectField(u'class_times', choices=[])
 
